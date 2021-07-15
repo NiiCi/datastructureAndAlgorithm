@@ -1,0 +1,13 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /study
+spring:
+  application:
+    name: niici-study
+  # @spring.profiles.active@ 用于搭配maven profiles，在打包时可以指定具体的配置文件
+  # 也可以指定为dev、prod、test
+#  profiles:
+#    active: @spring.profiles.active@
+  profiles:
+    active: prod
