@@ -84,7 +84,7 @@ public class LearnStack {
             if (i < str.length()) {
                 nextStr = str.substring(index, i + 1);
             }
-            // 递归判断当前是否为字符串
+            // 判断当前是否为字符串
             if (isNum(tempStr)) {
                 // 当下一个字符串仍未数字时, 跳过, 此时index不累加
                 if (isNum(nextStr)) {
