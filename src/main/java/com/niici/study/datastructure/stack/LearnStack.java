@@ -49,10 +49,10 @@ public class LearnStack {
         linkedListStack.list();
 
         LearnStack learnStack = new LearnStack();
-        log.info(learnStack.calculateExpression("700*2/6+4/2").toString());
+        log.info(learnStack.calculateExpression("7*6/6+4/2").toString());
         log.info(learnStack.againstPolandCalculator("30 4 + 5 * 6 - ").toString());
         // 中缀表达式
-        String infixExperssion = "1+((2+3)*4)-5";
+        String infixExperssion = "1+20+3*4-5";
         learnStack.transFormToSuffix(infixExperssion);
         log.info(learnStack.againstPolandCalculator(learnStack.transFormToSuffix(infixExperssion)).toString());
     }
@@ -80,15 +80,16 @@ public class LearnStack {
         for (int i = 1; i <= str.length(); i++) {
             tempStr = str.substring(index, i);
             String nextStr = "";
-            // 获取下一个字符串
-            if (i < str.length()) {
-                nextStr = str.substring(index, i + 1);
-            }
+
             // 判断当前是否为字符串
             if (isNum(tempStr)) {
-                // 当下一个字符串仍未数字时, 跳过, 此时index不累加
-                if (isNum(nextStr)) {
-                    continue;
+                // 获取下一个字符串
+                if (i < str.length()) {
+                    nextStr = str.substring(index, i + 1);
+                    // 当下一个字符串仍未数字时, 跳过, 此时index不累加
+                    if (isNum(nextStr)) {
+                        continue;
+                    }
                 }
                 // 当下一个字符串为字符时, 将当前数字入栈
                 // 7 -> index 0, i 1, 70 -> index 0 i 2 (此时实际上index应为1), 70+ -> index 2 i 3
@@ -125,16 +126,13 @@ public class LearnStack {
     }
 
     private boolean isNum(String str) {
-        if (StringUtils.isBlank(str)) {
-            return false;
+        for (int i = str.length(); --i >= 0; ) {
+            int chr = str.charAt(i);
+            if (chr < 48 || chr > 57) {
+                return false;
+            }
         }
-        try {
-            // 可使用正则表达式匹配
-            Integer.valueOf(str);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return true;
     }
 
     /**
@@ -201,6 +199,29 @@ public class LearnStack {
         // 定义两个栈: 数栈和运算符栈
         Stack<String> strStack = new Stack<>();
         Stack<String> numStack = new Stack<>();
+        List<String> strList = new ArrayList<>();
+        // 方案一：将表达式转为list进行遍历
+
+        /*for (int i = 1; i <= infixStr.length(); i++) {
+            String tempStr1 = infixStr.substring(index, i);
+            if (!isNum(tempStr1)) {
+                strList.add(tempStr1);
+                index++;
+            } else {
+                // 获取下一个字符串
+                if (i < infixStr.length()) {
+                    String nextStr = infixStr.substring(index, i + 1);
+                    if (isNum(nextStr)) {
+                        continue;
+                    }
+                }
+                // 当下标为最后一个元素时, 为数字则直接添加到列表中
+                strList.add(tempStr1);
+                index = i;
+            }
+        }*/
+
+
         /**
          * 前缀转后缀表达式逻辑
          * 1. 运算符栈为空, 直接入栈 index++
@@ -210,11 +231,68 @@ public class LearnStack {
          * 5. 当前运算符为右括号, 取出运算符栈栈顶元素, 压入数栈, 直到栈顶元素为左括号, 当前运算符入栈, index++
          * 6. 当前运算符优先级小于运算符栈栈顶元素, 将运算符栈栈顶元素, 压入数栈, 直到优先级大于栈顶元素，当前运算符入栈, index++
          */
+        /*strList.stream().forEach(str -> {
+            if (isNum(str)) {
+                numStack.push(str);
+            } else {
+                if (strStack.isEmpty()) {
+                    strStack.push(str);
+                } else {
+                    // 获取栈顶运算符
+                    String topStr = !strStack.isEmpty() ? strStack.pop() : null;
+                    // 当前运算符入栈时, 需要将前一个运算符先入栈
+                    // 栈顶运算符或者当前运算符是左括号、优先级大于栈顶元素, 将栈顶元素放回, 当前运算符入栈
+                    if ("(".equals(str) || "(".equals(topStr) || isCurrentPrior(topStr, str)) {
+                        strStack.push(topStr);
+                        strStack.push(str);
+
+                        // 当前运算符为右括号, 取出运算符栈栈顶元素, 压入数栈, 直到栈顶元素为左括号, 当前运算符入栈
+                    } else if (")".equals(str)) {
+                        while (!"(".equals(topStr)) {
+                            numStack.push(topStr);
+                            // 运算符栈为空时, 跳出while循环, 不需要将右括号入栈
+                            if (strStack.isEmpty()) {
+                                break;
+                            }
+                            topStr = strStack.pop();
+                        }
+
+                        // 当前运算符优先级小于运算符栈栈顶元素, 将运算符栈栈顶元素, 压入数栈, 直到优先级大于栈顶元素，当前运算符入栈, index++
+                    } else if (!isCurrentPrior(topStr, str)) {
+                        while (!isCurrentPrior(topStr, str)) {
+                            numStack.push(topStr);
+                            // 运算符栈为空时, 直接入栈跳出while循环
+                            if (strStack.isEmpty()) {
+                                strStack.push(str);
+                                break;
+                            }
+                            topStr = strStack.pop();
+                            // 运算符栈栈顶元素为左括号时, 将当前运算符入运算符栈
+                            if ("(".equals(topStr)) {
+                                strStack.push(str);
+                            }
+                        }
+                    }
+                }
+            }
+        });*/
+
+
+        // 方案二：直接遍历
         for (int i = 1; i <= infixStr.length(); i++) {
             tempStr = infixStr.substring(index, i);
             if (isNum(tempStr)) {
+                // 获取下一个字符串
+                if (i < infixStr.length()) {
+                    String nextStr = infixStr.substring(index, i + 1);
+                    if (isNum(nextStr)) {
+                        continue;
+                    }
+                }
+                // 当下标为最后一个元素时, 为数字则直接添加到列表中
                 numStack.push(tempStr);
-            } else{
+                index = i;
+            } else {
                 if (strStack.isEmpty()) {
                     strStack.push(tempStr);
                 } else {
@@ -254,8 +332,8 @@ public class LearnStack {
                         }
                     }
                 }
+                index++;
             }
-            index++;
         }
 
         // 将运算符栈中的元素出栈, 压入数栈中
