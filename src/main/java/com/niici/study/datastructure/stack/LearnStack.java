@@ -48,13 +48,12 @@ public class LearnStack {
         log.info("firstElement: {}", linkedListStack.firstElement());
         linkedListStack.list();
 
-        LearnStack learnStack = new LearnStack();
-        log.info(learnStack.calculateExpression("7*6/6+4/2").toString());
-        log.info(learnStack.againstPolandCalculator("30 4 + 5 * 6 - ").toString());
+        log.info(LearnStack.calculateExpression("7*6/6+4/2").toString());
+        log.info(LearnStack.againstPolandCalculator("30 4 + 5 * 6 - ").toString());
         // 中缀表达式
         String infixExperssion = "1+20+3*4-5";
-        learnStack.transFormToSuffix(infixExperssion);
-        log.info(learnStack.againstPolandCalculator(learnStack.transFormToSuffix(infixExperssion)).toString());
+        LearnStack.transFormToSuffix(infixExperssion);
+        log.info(LearnStack.againstPolandCalculator(LearnStack.transFormToSuffix(infixExperssion)).toString());
     }
 
 
@@ -68,7 +67,7 @@ public class LearnStack {
      *    否则直接入栈
      * 4. 最后进行运算，数栈出栈2个数，符号栈出栈一个运算符进行计算
      */
-    private Double calculateExpression(String str) {
+    public static Double calculateExpression(String str) {
         if (StringUtils.isBlank(str)) {
             log.error("expression is empty.");
             return null;
@@ -125,7 +124,7 @@ public class LearnStack {
         return numStack.pop();
     }
 
-    private boolean isNum(String str) {
+    public static boolean isNum(String str) {
         for (int i = str.length(); --i >= 0; ) {
             int chr = str.charAt(i);
             if (chr < 48 || chr > 57) {
@@ -141,7 +140,7 @@ public class LearnStack {
      * @param currentStr 当前与悬浮
      * @return
      */
-    private boolean isCurrentPrior(String preStr, String currentStr) {
+    public static boolean isCurrentPrior(String preStr, String currentStr) {
         Map<String, Integer> priorMap = new HashMap<>();
         priorMap.put("*", 2);
         priorMap.put("/", 2);
@@ -164,7 +163,7 @@ public class LearnStack {
      * @param num2
      * @return
      */
-    private Double caculate(String str, Double num1, Double num2) {
+    public static Double caculate(String str, Double num1, Double num2) {
         Double result = null;
         switch (str) {
             case "*" :
@@ -190,7 +189,7 @@ public class LearnStack {
      * @param infixStr
      * @return
      */
-    private String transFormToSuffix(String infixStr) {
+    public static String transFormToSuffix(String infixStr) {
         // (3+4+5)*5-6 ==> 3 4 + 5 + 5 * 6 -
         // (3+4+5)*5-6
         // 3+4*(5-6) ==> 3 4 5 6 - * +
@@ -358,7 +357,7 @@ public class LearnStack {
      * 支持小括号和多位数整数
      * 3 4 + 5 * 6 -
      */
-    private Double againstPolandCalculator(String againstPolandStr) {
+    public static Double againstPolandCalculator(String againstPolandStr) {
         if (StringUtils.isBlank(againstPolandStr)) {
             log.error("against poland expression is empty.");
             return null;
@@ -430,7 +429,7 @@ class ArrayStack {
      */
     public Integer pop() {
         if (top == -1) {
-            log.info("statck is empty.");
+            log.info("stack is empty.");
             return null;
         }
         Integer value = arr[top];
@@ -451,7 +450,7 @@ class ArrayStack {
      */
     public void list() {
         if (top == -1) {
-            log.info("statck is empty.");
+            log.info("stack is empty.");
             return;
         }
         for (int i = top; i >= 0; i--) {
@@ -500,7 +499,7 @@ class LinkedListStack {
      */
     public Integer pop() {
         if (top == -1) {
-            log.info("statck is empty.");
+            log.info("stack is empty.");
             return null;
         }
         HeroNode topNode = sinplyLinkedList.getHeadNode().getNext();
@@ -529,7 +528,7 @@ class LinkedListStack {
      */
     public void list() {
         if (top == -1) {
-            log.info("statck is empty.");
+            log.info("stack is empty.");
             return;
         }
         HeroNode tempNode = sinplyLinkedList.getHeadNode().getNext();
