@@ -1,4 +1,4 @@
-package com.niici.study.algorithm;
+package com.niici.study.algorithm.recursion;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package com.niici.study.algorithm;
+package com.niici.study.algorithm.recursion;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
