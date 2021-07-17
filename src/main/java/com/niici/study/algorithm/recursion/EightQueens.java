@@ -53,9 +53,11 @@ public class EightQueens {
      * @param num 第n个皇后(皇后的下标从0开始)
      */
     private void setQueen(int num) {
-        if (num == (max - 1)) {
+        // num最大到8, 递归调用最大为7+1, 此时8个皇后已经放完, num为8时直接打印, 返回
+        if (num == (max)) {
             // 打印皇后放置位置
             print();
+            count++;
             return;
         }
         // 依次放入皇后, 并判断是否冲突
