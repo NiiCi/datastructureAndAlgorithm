@@ -34,6 +34,7 @@ package com.niici.study.algorithm.sort;
  *  立方阶O(n³)                三层for循环
  *  K次方阶O(n^k)              n层for循环
  *  指数阶(2^n)
+ *  时间复杂度排序：由上述自顶向下一次增加
  */
 public interface BaseSort {
 }
