@@ -26,23 +26,27 @@ public class SelectSort {
         log.info("选择排序后的数组: {}", Arrays.toString(arr));
     }
 
+    /**
+     * 选择排序共有 数组大小 - 1轮排序。
+     * 每一轮排序，又是一个循环。
+     * 假设当前的数为最小数，与相邻数比较，小于则设相邻数为最小数，依次类推，找到当前数组中的最小数。
+     * 将最小数与原最小数交换位置。
+     */
     public static int[] sort(int[] arr) {
-        /**
-         * 选择排序共有 数组大小 - 1轮排序。
-         * 每一轮排序，又是一个循环。
-         * 假设当前的数为最小数，与相邻数比较，小于则设相邻数为最小数，依次类推，找到当前数组中的最小数。
-         * 将最小数与原最小数交换位置。
-         */
         for (int i = 0; i < arr.length - 1; i++) {
-            int min = arr[i];
-            // 每次进入当前循环时，第i个数之前的数已经是有序的，因此内层for是由j = i开始
-            for (int j = i; j < arr.length - 1; j++) {
-                if (min > arr[j + 1]) {
-                    min = arr[j + 1];
-                    arr[j + 1] = arr[i];
-                    arr[i] = min;
+            // 初始最小值下标
+            int minIndex = i;
+            int min = arr[minIndex];
+            // 起始位置为当前最小值的下一个位置，即为i + 1
+            for (int j = i + 1; j < arr.length; j++) {
+                if (min > arr[j]) {
+                    min = arr[j];
+                    minIndex = j;
                 }
             }
+            // 值交换
+            arr[minIndex] = arr[i];
+            arr[i] = min;
         }
         return arr;
     }
