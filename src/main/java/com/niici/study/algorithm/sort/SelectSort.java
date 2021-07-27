@@ -8,7 +8,7 @@ import java.util.Random;
 
 /**
  * 选择排序
- * 是从 待排序的数据中，按制定的规则轩主某一元素，再按照规定交换位置后达到排序的目的。
+ * 是从 待排序的数据中，按指定的规则轩主某一元素，再按照规定交换位置后达到排序的目的。
  * @author niici
  */
 @Data
@@ -18,7 +18,7 @@ public class SelectSort {
         int[] arr = new int[80000];
         for (int i = 0; i < 80000; i++) {
             Random random = new Random();
-            arr[i] = random.nextInt(80000);
+            arr[i] = random.nextInt(8000000);
         }
         long time = System.currentTimeMillis();
         SelectSort.sort(arr);
@@ -29,7 +29,10 @@ public class SelectSort {
     /**
      * 选择排序共有 数组大小 - 1轮排序。
      * 每一轮排序，又是一个循环。
-     * 假设当前的数为最小数，与相邻数比较，小于则设相邻数为最小数，依次类推，找到当前数组中的最小数。
+     * 内层循环：
+     *  假设当前的数为最小数，与相邻数比较，小于则设相邻数为最小数，更新下标最小值下标。
+     * 外层循环：
+     *  从数组第一个数开始遍历，将内层循环找出的最小值下标对应的值，与当前外层循环下标对应的数进行交换。
      * 将最小数与原最小数交换位置。
      */
     public static int[] sort(int[] arr) {

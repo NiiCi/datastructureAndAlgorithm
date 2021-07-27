@@ -25,7 +25,7 @@ public class BubbleSort implements BaseSort {
         int[] arr = new int[80000];
         for (int i = 0; i < 80000; i++) {
             Random random = new Random();
-            arr[i] = random.nextInt(80000);
+            arr[i] = random.nextInt(8000000);
         }
         log.info(""+ Arrays.toString(arr));
 
