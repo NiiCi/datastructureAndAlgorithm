@@ -13,7 +13,7 @@ import java.util.Random;
  */
 @Data
 @Slf4j
-public class SelectSort {
+public class SelectSort implements BaseSort{
     public static void main(String[] args) {
         int[] arr = new int[80000];
         for (int i = 0; i < 80000; i++) {
