@@ -20,13 +20,9 @@ import java.util.Random;
 @Data
 @ToString
 @Slf4j
-public class BubbleSort implements BaseSort {
+public class BubbleSort extends BaseSort {
     public static void main(String[] args) {
-        int[] arr = new int[80000];
-        for (int i = 0; i < 80000; i++) {
-            Random random = new Random();
-            arr[i] = random.nextInt(8000000);
-        }
+        int[] arr = generateRandom();
         log.info(""+ Arrays.toString(arr));
 
         long time = System.currentTimeMillis();

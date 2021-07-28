@@ -38,6 +38,7 @@ Shell|O(nlogN)|O(n^s) 1<s<2|不稳定|O(1)|s是所选分组
 归并|O(nlogN)|O(nlogN)|稳定|O(1)|n大时较好
 堆|O(nlogN)|O(nlogN)|不稳定|O(1)|n大时较好
 
+<font color=#FF0000 size=2>实际测试中所用时间：冒泡 > 选择 > 插入。</font></br>
 <font color=#FF0000 size=2>一般考虑的是最坏时间复杂度。</font>
 
 ---

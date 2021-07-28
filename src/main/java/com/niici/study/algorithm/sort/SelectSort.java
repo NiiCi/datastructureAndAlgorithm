@@ -13,13 +13,9 @@ import java.util.Random;
  */
 @Data
 @Slf4j
-public class SelectSort implements BaseSort{
+public class SelectSort extends BaseSort{
     public static void main(String[] args) {
-        int[] arr = new int[80000];
-        for (int i = 0; i < 80000; i++) {
-            Random random = new Random();
-            arr[i] = random.nextInt(8000000);
-        }
+        int[] arr = generateRandom();
         long time = System.currentTimeMillis();
         SelectSort.sort(arr);
         log.info("运行时间: {}ms", System.currentTimeMillis() - time);

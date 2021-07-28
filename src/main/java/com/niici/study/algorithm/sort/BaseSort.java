@@ -1,5 +1,7 @@
 package com.niici.study.algorithm.sort;
 
+import java.util.Random;
+
 /**
  * 排序
  * 将一组数据，依制定的顺序进行排列的过程。
@@ -16,5 +18,13 @@ package com.niici.study.algorithm.sort;
  *
  * 时间频度和时间复杂度见sort.md
  */
-public interface BaseSort {
+public abstract class BaseSort {
+    public static int[] generateRandom() {
+        int[] arr = new int[80000];
+        for (int i = 0; i < 80000; i++) {
+            Random random = new Random();
+            arr[i] = random.nextInt(8000000);
+        }
+        return arr;
+    }
 }
