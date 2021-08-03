@@ -25,16 +25,17 @@ public class QuickSort extends BaseSort{
     }
 
     /**
-     *
+     * 以中轴数为基数的快速排序
      * @param arr
-     * @param left 向左递归时的起始下标(基数左边开始递归的下标)
-     * @param right 向右递归时的起始下标(基数右边开始递归的下标)
+     * @param left 向左递归时的起始下标
+     * @param right 向右递归时的起始下标
      * @return
      */
     public static int[] sort(int[] arr, int left, int right) {
+        // 临时变量，接收左右的起始位置下标
         int leftIndex = left;
         int rightIndex = right;
-        // 比较基数
+        // 计算基数，这里取得是数组的中轴数
         int baseValue = arr[(leftIndex + rightIndex) / 2];
         int temp;
         // 基数为中轴数，则只有在leftIndex < rightIndex场景下，才进行排序
@@ -59,16 +60,21 @@ public class QuickSort extends BaseSort{
             arr[leftIndex] = arr[rightIndex];
             arr[rightIndex] = temp;
 
+            // 防止死循环
             // arr[leftIndex] 为原 arr[rightIndex]，当等于基数时，index--
             if (arr[leftIndex] == baseValue) {
                 rightIndex--;
             }
+
+            // 防止死循环
             // arr[rightIndex] 为原 arr[leftIndex]，当等于基数时，index++
             if (arr[rightIndex] == baseValue) {
                 leftIndex++;
             }
+
         }
 
+        // 当左右index相等时，leftIndex需要向右移动，rightIndex需要向左移动，进行向左递归和向右递归
         if (leftIndex == rightIndex) {
             leftIndex++;
             rightIndex--;
