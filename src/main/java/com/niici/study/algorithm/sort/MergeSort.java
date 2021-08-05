@@ -90,10 +90,12 @@ public class MergeSort extends BaseSort{
         // 3. 将temp数组拷贝给原数组。注意：并不是每次都拷贝tempArr的所有元素到arr中，每次合并可能只有部分元素组成一个tempArr
         tempIndex = 0;
         int tempLeft = left;
+        log.info("tempLeft: {}, right: {}", tempLeft, right);
         while (tempLeft <= right) {
             arr[tempLeft] = tempArr[tempIndex];
             tempLeft++;
             tempIndex++;
         }
+        log.info(Arrays.toString(arr));
     }
 }
