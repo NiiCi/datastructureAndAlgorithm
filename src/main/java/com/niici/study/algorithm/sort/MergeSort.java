@@ -28,15 +28,13 @@ public class MergeSort extends BaseSort{
     public static void sort(int[] arr, int left, int right, int[] tempArr) {
         // 向左递归时, mid是向左递归的right，最终会等于right
         // 向右递归时, mid是向右递归的left，最终会等于right
-        // {5, 6, 7, 20, 1, 10, 13, 15, 21}为例
-        // 分解完成后为 5 6 7 20 1 10 10 13 15 21，此时left=0，right=length-1=8，mid=4
         if (left < right) {
             int mid = (left + right) / 2;
             // 先向左递归分解
             sort(arr, left, mid, tempArr);
             // 再向右递归分解
             sort(arr, mid + 1, right, tempArr);
-            // 合并
+            // 每递归分解完成一次，就合并一次
             merge(arr, left, mid, right, tempArr);
         }
     }
