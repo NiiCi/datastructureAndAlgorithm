@@ -14,9 +14,8 @@ import java.util.Arrays;
 @Slf4j
 public class MergeSort extends BaseSort{
     public static void main(String[] args) {
-        //int[] arr = generateRandom();
-        int[] arr = {5, 6, 7, 20, 1, 10, 13, 15, 21};
-        //MergeSort.sort(arr);
+        int[] arr = generateRandom();
+        //int[] arr = {5, 6, 7, 20, 1, 10, 13, 15, 21};
         int[] tempArr = new int[arr.length];
         long time = System.currentTimeMillis();
         MergeSort.sort(arr, 0, arr.length - 1, tempArr);
@@ -90,12 +89,12 @@ public class MergeSort extends BaseSort{
         // 3. 将temp数组拷贝给原数组。注意：并不是每次都拷贝tempArr的所有元素到arr中，每次合并可能只有部分元素组成一个tempArr
         tempIndex = 0;
         int tempLeft = left;
-        log.info("tempLeft: {}, right: {}", tempLeft, right);
+        //log.info("tempLeft: {}, right: {}", tempLeft, right);
         while (tempLeft <= right) {
             arr[tempLeft] = tempArr[tempIndex];
             tempLeft++;
             tempIndex++;
         }
-        log.info(Arrays.toString(arr));
+        //log.info(Arrays.toString(arr));
     }
 }
