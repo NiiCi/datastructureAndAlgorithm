@@ -2,6 +2,10 @@ package com.niici.study.algorithm.search;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 /**
  * 二分查找
  *  必须是一个有序数组才可以进行二分查找
@@ -14,9 +18,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BinarySearch extends BaseSearch {
     public static void main(String[] args) {
-        int[] arr = {-1, 1, 9, 11, 34, 89};
+        //int[] arr = {-1, 1, 9, 11, 34, 89};
+        List<Integer> list = IntStream.rangeClosed(0, 800000).boxed().collect(Collectors.toList());
+        Integer[] arr = new Integer[list.size()];
+        list.toArray(arr);
         long time = System.currentTimeMillis();
-        int index = BinarySearch.search(arr, 0, arr.length - 1, 89);
+        int index = BinarySearch.search(arr, 0, arr.length - 1, 40000);
         log.info("运行时间: {}ms", System.currentTimeMillis() - time);
         if (index != -1) {
             log.info("二分查找匹配到的数的下标为：{}", index);
@@ -25,7 +32,7 @@ public class BinarySearch extends BaseSearch {
         }
     }
 
-    public static int search(int[] arr, int left, int right, int value) {
+    public static int search(Integer[] arr, int left, int right, int value) {
         // 向左递归查找时, mid-1后 rightIndex可能小于0，证明数组已经遍历完成
         // 向右递归查找时, mid+1后 leftIndex可能大于arr.length - 1，证明数组已经遍历完成
         if (left > right) {
