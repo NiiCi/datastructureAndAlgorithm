@@ -1,5 +1,6 @@
 package com.niici.study.algorithm.search;
 
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -22,12 +23,12 @@ import java.util.List;
 public class InterpolationSearch extends BaseSearch {
     public static void main(String[] args) {
         Integer[] arr2 = {-1, 1, 1, 9, 11, 34, 34, 89};
-        List<Integer> indexs = InterpolationSearch.search(arr2, 0, arr2.length - 1, -1);
+        List<Integer> indexs = InterpolationSearch.search(arr2, 0, arr2.length - 1, 1);
         log.info("插值查找匹配到的数的下标为：{}", indexs);
     }
 
     /**
-     * 增强二分查找，当多个数相同时，返回多个下标
+     * 插值查找，当多个数相同时，返回多个下标
      * 思路分析：
      *  1. 在找到mid时，不要马上返回
      *  2. 向mid索引值的左边扫描，将所有满足条件的元素的下标，加入到一个集合中
@@ -51,11 +52,12 @@ public class InterpolationSearch extends BaseSearch {
         } else if (value < arr[mid]){
             return search(arr, left, mid - 1, value);
         } else {
-            List<Integer> indexList = new ArrayList<>();
-            // 向左遍历
+            // 已找到相等的数，则向左向右递归，查找是否仍存在相等的数
+            List<Integer> indexList = Lists.newArrayList();
+            // 向左遍历(向左移一位开始遍历排除当前已找到的数)
             int temp = mid - 1;
             // 有序数组，相同的元素一定相邻
-            while(temp >=0 && value == arr[temp]) {
+            while(temp >= 0 && value == arr[temp]) {
                 indexList.add(temp);
                 temp--;
             }
