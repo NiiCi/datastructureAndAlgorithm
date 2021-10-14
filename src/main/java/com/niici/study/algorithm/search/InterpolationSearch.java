@@ -17,6 +17,9 @@ import java.util.List;
  *   插值查找mid：mid = left + ((value - arr[left]) / (arr[right] - arr[left])) * (right - left)
  *   left + x * (right - left) x为系数，二分查找系数为1/2，插值查找为(value - arr[left]) / (arr[right] - arr[left])
  *
+ *  插值查找注意事项：
+ *    对于数据量较大，关键字分布比较均匀的查找表来说，采用插值查找，速度较快。
+ *    关键字分布不均匀的情况下，该方法不一定比二分查找要好。
  * @author niici
  */
 @Slf4j
@@ -42,7 +45,7 @@ public class InterpolationSearch extends BaseSearch {
     public static List<Integer> search(Integer[] arr, int left, int right, int value) {
         // 向左递归查找时, mid-1后 rightIndex可能小于0，证明数组已经遍历完成
         // 向右递归查找时, mid+1后 leftIndex可能大于arr.length - 1，证明数组已经遍历完成
-        if (left > right) {
+        if (left > right || value < arr[0] || value > arr[arr.length - 1]) {
             return new ArrayList<>();
         }
         int mid = left + (right - left) * (value - arr[left]) / (arr[right] - arr[left]);
