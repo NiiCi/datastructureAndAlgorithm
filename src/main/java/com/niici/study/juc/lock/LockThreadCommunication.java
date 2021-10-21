@@ -13,7 +13,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author niici
  */
 @Slf4j
-public class ThreadCommunication {
+public class LockThreadCommunication {
     public static void main(String[] args) {
         Share share = new Share();
         new Thread(() -> {

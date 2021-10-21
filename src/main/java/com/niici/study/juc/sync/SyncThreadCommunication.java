@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
  * 例子：创建两个线程，一个线程对值加1，一个线程对值减1
  */
 @Slf4j
-public class ThreadCommunication {
+public class SyncThreadCommunication {
     public static void main(String[] args) {
         Share share = new Share();
         new Thread(() -> {
